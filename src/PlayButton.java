@@ -49,7 +49,10 @@ public class PlayButton extends JButton {
      * ActionEvent occurs)
      */
     public PlayButton(Color color, String baseName, ActionListener listener) {
-
+        this.color = color;
+        this.baseFilename = baseName + ".wav";
+        addActionListener(listener);
+        setBackground(INACTIVE_COLOR);
     }
 
     /**
@@ -60,7 +63,11 @@ public class PlayButton extends JButton {
      * and repaint the component once again.
      */
     public void activate() {
-
+        setBackground(color);
+        paintComponent(getGraphics());
+        WavPlayer.play(baseFilename);
+        setBackground(INACTIVE_COLOR);
+        paintComponent(getGraphics());
     }
 
 }

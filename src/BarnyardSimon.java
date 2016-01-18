@@ -5,6 +5,7 @@ import javax.swing.JTextArea;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -44,6 +45,9 @@ public class BarnyardSimon extends JFrame {
         public void actionPerformed(ActionEvent event) {
             btnStart.setEnabled(false);
             btnStart.setText("Playing");
+            rGen = new Random();
+            sequence = new ArrayList<>();
+            playSequence();
         }
 
     }
@@ -74,6 +78,25 @@ public class BarnyardSimon extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent event) {
+            if(event.getSource() == buttons[sequence.get(countCorrect)]){
+                buttons[sequence.get(countCorrect)].activate();
+                countCorrect++;
+            }else if(event.getSource() != buttons[sequence.get(countCorrect)]){
+                btnStart.setEnabled(true);
+                btnStart.setText("Start");
+                if(countCorrect > highScore && countCorrect < sequence.size() - 1){
+                    highScore = countCorrect;
+                }else if(sequence.size() - 1 > highScore){
+                    highScore = sequence.size() - 1;
+                }
+                countCorrect = 0;
+                scoreReport.setText("Current: "+ countCorrect + "\nHigh: " + highScore);
+            }
+            if(countCorrect == sequence.size()){
+                scoreReport.setText("Current: "+ countCorrect + "\nHigh: " + highScore);
+                countCorrect = 0;
+                playSequence();
+            }
 
         }
 
@@ -112,11 +135,13 @@ public class BarnyardSimon extends JFrame {
     public BarnyardSimon() {
         setTitle("Barnyard Simon");
         setSize(WIDTH, HEIGHT);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(3, 2));
 
         scoreReport = new JTextArea();
-        scoreReport.setText("Current: 0\nHigh: " + highScore);
+        scoreReport.setText("Current: "+ countCorrect + "\nHigh: " + highScore);
+        scoreReport.setEditable(false);
 
         btnStart = new JButton("Start");
         btnStart.addActionListener(new StartGame());
@@ -143,7 +168,9 @@ public class BarnyardSimon extends JFrame {
      * @param enable True to enable, false to disable
      */
     private void enableButtons(boolean enable) {
-
+        for(PlayButton button: buttons){
+            button.setEnabled(enable);
+        }
     }
 
     /**
@@ -154,7 +181,10 @@ public class BarnyardSimon extends JFrame {
      * play buttons should be enabled before returning from this method.
      */
     public void playSequence() {
-
+        sequence.add(rGen.nextInt(4));
+        enableButtons(false);
+        sequence.forEach(integer -> buttons[integer].activate());
+        enableButtons(true);
     }
 
 }
