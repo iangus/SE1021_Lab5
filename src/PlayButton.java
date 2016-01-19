@@ -1,10 +1,14 @@
-/*
- *
+
+/**
+ * SE1021 - 032
+ * Winter 2016
+ * Lab 5
+ * Name: Ian Guswiler
+ * Created: 1/14/2016
  */
 
 
 import edu.msoe.se1021.lab4.WavPlayer;
-
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -12,7 +16,7 @@ import java.awt.event.ActionListener;
 /**
  * Class to describe a button used in the Barnyard Simon game. The class manages
  * the button along with its color and sound.
- * @author FIX
+ * @author Ian Guswiler
  * @version 20160113_5
  */
 public class PlayButton extends JButton {

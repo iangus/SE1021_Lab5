@@ -1,7 +1,14 @@
+
+/**
+ * SE1021 - 032
+ * Winter 2016
+ * Lab 5
+ * Name: Ian Guswiler
+ * Created: 1/14/2016
+ */
+
 import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,14 +29,14 @@ import java.util.Random;
  * lit and a tone (unique for each button) being played for a short amount of time.
  * Barnyard Simon differs in that the sounds associated with each button are
  * barnyard animal sounds.
- * @author FIX
+ * @author Ian Guswiler
  * @version 20160113_5
  */
 public class BarnyardSimon extends JFrame {
 
     /**
      * This class listens solely to the start button component of the GUI.
-     * @author FIX
+     * @author Ian Guswiler
      * @version 20160113_5
      */
     private class StartGame implements ActionListener {
@@ -136,7 +143,7 @@ public class BarnyardSimon extends JFrame {
         setTitle("Barnyard Simon");
         setSize(WIDTH, HEIGHT);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new GridLayout(3, 2));
 
         scoreReport = new JTextArea();
